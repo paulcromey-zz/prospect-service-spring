@@ -21,10 +21,8 @@ public class ProspectsService {
     private ProspectsRepository repository;
 
     public List<Prospect> getProspects() {
-    	logger.info("Called getProspects method");
-    	List<Prospect> prospects = repository.findAll();
-    	logger.info("Prospects: " + prospects);
-        return prospects;
+    	logger.info(new Object(){}.getClass().getEnclosingMethod().getName());
+        return repository.findAll();
     }
 
 }
