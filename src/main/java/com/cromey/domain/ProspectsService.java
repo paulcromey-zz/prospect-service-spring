@@ -14,15 +14,16 @@ import java.util.List;
  */
 @Service
 public class ProspectsService {
-	
+
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @Autowired
-    private ProspectsRepository repository;
+	@Autowired
+	private ProspectsRepository repository;
 
-    public List<Prospect> getProspects() {
-    	logger.info(new Object(){}.getClass().getEnclosingMethod().getName());
-        return repository.findAll();
-    }
+	public List<Prospect> getProspects() {
+		logger.info(new Object() {
+		}.getClass().getEnclosingMethod().getName());
+		return repository.findAll();
+	}
 
 }

@@ -13,21 +13,21 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @ComponentScan
 @Configuration
 public class WebConfig extends WebMvcConfigurerAdapter implements EmbeddedServletContainerCustomizer {
-	
+
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @Override
-    public void customize(ConfigurableEmbeddedServletContainer container) {
-        if (container instanceof TomcatEmbeddedServletContainerFactory) {
-            TomcatEmbeddedServletContainerFactory factory = (TomcatEmbeddedServletContainerFactory) container;
-            AccessLogValve accessLogValve = new AccessLogValve();
-            accessLogValve.setDirectory("/var/log/prospectsservice");
-            accessLogValve.setPattern("combined");
-            accessLogValve.setSuffix(".log");
-            factory.addContextValves(accessLogValve);
-        } else {
-            logger.error("WARNING! this customizer does not support your configured container");
-        }
-    }
+	@Override
+	public void customize(ConfigurableEmbeddedServletContainer container) {
+		if (container instanceof TomcatEmbeddedServletContainerFactory) {
+			TomcatEmbeddedServletContainerFactory factory = (TomcatEmbeddedServletContainerFactory) container;
+			AccessLogValve accessLogValve = new AccessLogValve();
+			accessLogValve.setDirectory("/var/log/prospectsservice");
+			accessLogValve.setPattern("combined");
+			accessLogValve.setSuffix(".log");
+			factory.addContextValves(accessLogValve);
+		} else {
+			logger.error("WARNING! this customizer does not support your configured container");
+		}
+	}
 
 }

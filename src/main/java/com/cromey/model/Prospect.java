@@ -9,15 +9,15 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * Our very important and sophisticated data model
  */
 @SuppressWarnings("serial")
-@Document(collection="prospects")
+@Document(collection = "prospects")
 public class Prospect implements Serializable {
 
 	@Id
 	String id;
-    String uuid;
-    String email;
-    
-    public String getId() {
+	String uuid;
+	String email;
+
+	public String getId() {
 		return id;
 	}
 
@@ -26,14 +26,14 @@ public class Prospect implements Serializable {
 	}
 
 	public String getUUID() {
-        return uuid;
-    }
+		return uuid;
+	}
 
-    public void setUUID(String uuid) {
-        this.uuid = uuid;
-    }
-    
-    public String getEmail() {
+	public void setUUID(String uuid) {
+		this.uuid = uuid;
+	}
+
+	public String getEmail() {
 		return email;
 	}
 
@@ -41,29 +41,31 @@ public class Prospect implements Serializable {
 		this.email = email;
 	}
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
 
-        Prospect prospect = (Prospect) o;
+		Prospect prospect = (Prospect) o;
 
-        if (getUUID() != null ? !getUUID().equals(prospect.getUUID()) : prospect.getUUID() != null){
-        	return false;
-        }
-            
-        if (getEmail() != null ? !getEmail().equals(prospect.getEmail()) : prospect.getEmail() != null){
-        	return false;
-        }
-        return !(getEmail() != null ? !getEmail().equals(prospect.getEmail()) : prospect.getEmail() != null);
+		if (getUUID() != null ? !getUUID().equals(prospect.getUUID()) : prospect.getUUID() != null) {
+			return false;
+		}
 
-    }
+		if (getEmail() != null ? !getEmail().equals(prospect.getEmail()) : prospect.getEmail() != null) {
+			return false;
+		}
+		return !(getEmail() != null ? !getEmail().equals(prospect.getEmail()) : prospect.getEmail() != null);
 
-    @Override
-    public int hashCode() {
-        int result = getUUID() != null ? getUUID().hashCode() : 0;
-        result = 31 * result + (getEmail() != null ? getEmail().hashCode() : 0);
-        return result;
-    }
+	}
+
+	@Override
+	public int hashCode() {
+		int result = getUUID() != null ? getUUID().hashCode() : 0;
+		result = 31 * result + (getEmail() != null ? getEmail().hashCode() : 0);
+		return result;
+	}
 
 }

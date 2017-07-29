@@ -18,17 +18,18 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/prospects/")
 public class ProspectsController {
-	
+
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    // Let Spring DI inject the service for us
-    @Autowired
-    private ProspectsService prospectsService;
+	// Let Spring DI inject the service for us
+	@Autowired
+	private ProspectsService prospectsService;
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public List<Prospect> getProspects() {
-    	logger.info(new Object(){}.getClass().getEnclosingMethod().getName());
-        return prospectsService.getProspects();
-    }
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public List<Prospect> getProspects() {
+		logger.info(new Object() {
+		}.getClass().getEnclosingMethod().getName());
+		return prospectsService.getProspects();
+	}
 
 }

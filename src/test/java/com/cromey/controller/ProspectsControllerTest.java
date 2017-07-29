@@ -27,23 +27,23 @@ import com.cromey.model.Prospect;
 @RunWith(MockitoJUnitRunner.class)
 @WebAppConfiguration
 public class ProspectsControllerTest {
-	
-    @InjectMocks
-    ProspectsController prospectsController;
-    
-    @Mock
-    ProspectsService prospectsService;
-    
-    @Mock
-    View mockView;
 
-    MockMvc mockMvc;
+	@InjectMocks
+	ProspectsController prospectsController;
 
-    @Before
-    public void setUp() throws Exception {
-        MockitoAnnotations.initMocks(this);
-        mockMvc = MockMvcBuilders.standaloneSetup(prospectsController).setSingleView(mockView).build();
-    }
+	@Mock
+	ProspectsService prospectsService;
+
+	@Mock
+	View mockView;
+
+	MockMvc mockMvc;
+
+	@Before
+	public void setUp() throws Exception {
+		MockitoAnnotations.initMocks(this);
+		mockMvc = MockMvcBuilders.standaloneSetup(prospectsController).setSingleView(mockView).build();
+	}
 
 	@After
 	public void tearDown() throws Exception {

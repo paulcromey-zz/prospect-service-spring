@@ -8,7 +8,7 @@ import org.junit.Test;
 public class ProspectTest {
 
 	Prospect prospect;
-	
+
 	@Before
 	public void setUp() throws Exception {
 		prospect = new Prospect();
