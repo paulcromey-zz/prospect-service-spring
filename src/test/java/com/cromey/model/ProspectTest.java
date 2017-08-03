@@ -14,6 +14,8 @@ public class ProspectTest {
 		prospect = new Prospect();
 		prospect.setUUID("1");
 		prospect.setEmail("firstname.lastname@gmail.com");
+		prospect.setSource("source");
+		prospect.setToken("token");
 	}
 
 	@After
@@ -29,6 +31,16 @@ public class ProspectTest {
 	@Test
 	public void testGetEmail() {
 		Assert.assertEquals("firstname.lastname@gmail.com", prospect.getEmail());
+	}
+	
+	@Test
+	public void testGetSource() {
+		Assert.assertEquals("source", prospect.getSource());
+	}
+	
+	@Test
+	public void testGetToken() {
+		Assert.assertEquals("token", prospect.getToken());
 	}
 
 }

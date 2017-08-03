@@ -27,8 +27,6 @@ public class ProspectsController {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public List<Prospect> getProspects() {
-		logger.info(new Object() {
-		}.getClass().getEnclosingMethod().getName());
 		return prospectsService.getProspects();
 	}
 

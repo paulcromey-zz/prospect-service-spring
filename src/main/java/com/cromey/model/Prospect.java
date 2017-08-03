@@ -16,6 +16,9 @@ public class Prospect implements Serializable {
 	String id;
 	String uuid;
 	String email;
+	String source;
+	String token;
+	String ip_address;
 
 	public String getId() {
 		return id;
@@ -41,7 +44,31 @@ public class Prospect implements Serializable {
 		this.email = email;
 	}
 
-	@Override
+	public String getSource() {
+		return source;
+	}
+
+	public void setSource(String source) {
+		this.source = source;
+	}
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
+	}
+
+	public String getIp_address() {
+		return ip_address;
+	}
+
+	public void setIp_address(String ip_address) {
+		this.ip_address = ip_address;
+	}
+
+	/*@Override
 	public boolean equals(Object o) {
 		if (this == o)
 			return true;
@@ -66,6 +93,6 @@ public class Prospect implements Serializable {
 		int result = getUUID() != null ? getUUID().hashCode() : 0;
 		result = 31 * result + (getEmail() != null ? getEmail().hashCode() : 0);
 		return result;
-	}
+	}*/
 
 }
