@@ -116,7 +116,7 @@ public class ProspectsControllerTest {
 		
 		when(prospectsService.updateProspect(prospect)).thenReturn(prospect);
 		
-		mockMvc.perform(put("/api/prospects/{id}", prospect.getId())
+		mockMvc.perform(put("/api/prospects/{id}", 81)
 				.contentType(APPLICATION_FORM_URLENCODED)
 				.content(convertObjectToJsonBytes(prospect))).andExpect(status().isNoContent());
 	}

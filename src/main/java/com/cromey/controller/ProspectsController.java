@@ -46,6 +46,9 @@ public class ProspectsController {
 	@RequestMapping(method = RequestMethod.POST, consumes = { "application/x-www-form-urlencoded" })
 	@ResponseStatus(HttpStatus.CREATED)
 	public @ResponseBody Prospect addProspect(Prospect prospect) {
+		prospect.setUUID(UUID.randomUUID().toString());
+		prospect.setCreatedOn(LocalDateTime.now().format(dtf));
+		prospect.setUpdatedOn(LocalDateTime.now().format(dtf));
 		return prospectsService.addProspect(prospect);
 	}
 
@@ -63,7 +66,7 @@ public class ProspectsController {
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = { "application/x-www-form-urlencoded" })
-	@ResponseStatus(HttpStatus.CREATED)
+	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public @ResponseBody Prospect updateProspect(Prospect prospect) {
 		Prospect updated = prospectsService.getProspect(prospect.getId());
 		if (Objects.isNull(updated))
@@ -71,9 +74,8 @@ public class ProspectsController {
 		updated.setEmail(prospect.getEmail());
 		updated.setSource(prospect.getSource());
 		updated.setIp_address(prospect.getIp_address());
-		updated.setToken(prospect.getToken());
 		updated.setUpdatedOn(LocalDateTime.now().format(dtf));
-		return prospectsService.updateProspect(prospect);
+		return prospectsService.updateProspect(updated);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
