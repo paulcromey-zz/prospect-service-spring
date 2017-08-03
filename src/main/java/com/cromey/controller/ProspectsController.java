@@ -36,20 +36,16 @@ import javax.validation.Valid;
 public class ProspectsController {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
-	private final DateTimeFormatter dtf = DateTimeFormatter
-			.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-
+	
+	private final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+	
 	// Let Spring DI inject the service for us
 	@Autowired
 	private ProspectsService prospectsService;
-	
-	@RequestMapping(method = RequestMethod.POST,
-			consumes = {"application/x-www-form-urlencoded"})
+
+	@RequestMapping(method = RequestMethod.POST, consumes = { "application/x-www-form-urlencoded" })
 	@ResponseStatus(HttpStatus.CREATED)
-	public @ResponseBody Prospect addProspect(Prospect prospect){
-		prospect.setUUID(UUID.randomUUID().toString());
-		prospect.setCreatedOn(LocalDateTime.now().format(dtf));
-		prospect.setUpdatedOn(LocalDateTime.now().format(dtf));
+	public @ResponseBody Prospect addProspect(Prospect prospect) {
 		return prospectsService.addProspect(prospect);
 	}
 
@@ -57,29 +53,46 @@ public class ProspectsController {
 	public List<Prospect> getProspects() {
 		return prospectsService.getProspects();
 	}
-	
+
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public Prospect getProspect(@PathVariable("id") String id) {
 		Prospect prospect = prospectsService.getProspect(id);
-		if(Objects.isNull(prospect))
+		if (Objects.isNull(prospect))
 			throw new ProspectNotFoundException();
 		return prospectsService.getProspect(id);
 	}
 	
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = { "application/x-www-form-urlencoded" })
+	@ResponseStatus(HttpStatus.CREATED)
+	public @ResponseBody Prospect updateProspect(Prospect prospect) {
+		Prospect updated = prospectsService.getProspect(prospect.getId());
+		if (Objects.isNull(updated))
+			throw new ProspectNotFoundException();
+		updated.setEmail(prospect.getEmail());
+		updated.setSource(prospect.getSource());
+		updated.setIp_address(prospect.getIp_address());
+		updated.setToken(prospect.getToken());
+		updated.setUpdatedOn(LocalDateTime.now().format(dtf));
+		return prospectsService.updateProspect(prospect);
+	}
+
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public Prospect deleteProspect(@PathVariable("id") String id) {
-		return prospectsService.deleteProspect(id);
+	public @ResponseBody Prospect deleteProspect(@PathVariable("id") String id) {
+		Prospect deleted = prospectsService.getProspect(id);
+		if (Objects.isNull(deleted))
+			throw new ProspectNotFoundException();
+		return prospectsService.deleteProspect(deleted);
 	}
-	
-	@ResponseStatus(value=HttpStatus.NOT_FOUND, reason="No such Prospect")
+
+	@ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "No such Prospect")
 	public class ProspectNotFoundException extends RuntimeException {
 
 		/**
 		 * 
 		 */
 		private static final long serialVersionUID = 1L;
-	     
+
 	}
 
 }

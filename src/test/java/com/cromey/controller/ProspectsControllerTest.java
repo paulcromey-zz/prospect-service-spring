@@ -5,6 +5,7 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.io.IOException;
@@ -98,6 +99,26 @@ public class ProspectsControllerTest {
 		when(prospectsService.getProspect("1")).thenReturn(prospect);
 		
 		mockMvc.perform(get("/api/prospects/{id}", 1)).andExpect(status().isOk());
+	}
+	
+	@Test
+	public void testUpdateProspect() throws Exception {
+
+		Prospect prospect = new Prospect();
+		prospect.setId("1");
+		prospect.setEmail("someone@gmail.com");
+		
+		when(prospectsService.updateProspect(isA(Prospect.class))).then(invocationOnMock -> {
+			Prospect updated = (Prospect) invocationOnMock.getArguments()[0];
+			updated.setId("1");
+			return updated;
+		});
+		
+		when(prospectsService.updateProspect(prospect)).thenReturn(prospect);
+		
+		mockMvc.perform(put("/api/prospects/{id}", prospect.getId())
+				.contentType(APPLICATION_FORM_URLENCODED)
+				.content(convertObjectToJsonBytes(prospect))).andExpect(status().isNoContent());
 	}
 	
 	@Test
