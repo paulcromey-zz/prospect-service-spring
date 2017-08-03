@@ -110,6 +110,12 @@ public class ProspectsControllerTest {
 		mockMvc.perform(delete("/api/prospects/{id}", 1)).andExpect(status().isNoContent());
 	}
 	
+	@Test
+	public void testGetProspectNotFound() throws Exception {
+		
+		mockMvc.perform(get("/api/prospects/{id}", 1)).andExpect(status().isNotFound());
+	}
+	
 	static byte[] convertObjectToJsonBytes(Object object) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);

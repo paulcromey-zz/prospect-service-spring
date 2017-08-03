@@ -7,7 +7,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,9 +18,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import static org.mockito.Matchers.isNotNull;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 import javax.validation.Valid;
@@ -55,6 +60,9 @@ public class ProspectsController {
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public Prospect getProspect(@PathVariable("id") String id) {
+		Prospect prospect = prospectsService.getProspect(id);
+		if(Objects.isNull(prospect))
+			throw new ProspectNotFoundException();
 		return prospectsService.getProspect(id);
 	}
 	
@@ -62,6 +70,16 @@ public class ProspectsController {
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public Prospect deleteProspect(@PathVariable("id") String id) {
 		return prospectsService.deleteProspect(id);
+	}
+	
+	@ResponseStatus(value=HttpStatus.NOT_FOUND, reason="No such Prospect")
+	public class ProspectNotFoundException extends RuntimeException {
+
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+	     
 	}
 
 }
