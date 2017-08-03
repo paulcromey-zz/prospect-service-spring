@@ -1,14 +1,11 @@
 package com.cromey.domain;
 
-import com.cromey.model.Prospect;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
-import java.util.UUID;
+import com.cromey.model.Prospect;
 
 /**
  * This is a little service class we will let Spring inject later.
