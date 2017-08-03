@@ -1,9 +1,8 @@
 package com.cromey.model;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.TimeZone;
+import java.util.UUID;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -18,7 +17,7 @@ public class ProspectTest {
 	public void setUp() throws Exception {
 		
 		prospect = new Prospect();
-		prospect.setUUID("1");
+		prospect.setUUID(UUID.randomUUID().toString());
 		prospect.setEmail("firstname.lastname@gmail.com");
 		prospect.setSource("source");
 		prospect.setToken("token");
@@ -33,7 +32,7 @@ public class ProspectTest {
 
 	@Test
 	public void testGetUUID() {
-		Assert.assertEquals("1", prospect.getUUID());
+		Assert.assertNotNull(prospect.getUUID());
 	}
 
 	@Test

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.UUID;
 
 import javax.validation.Valid;
 
@@ -26,32 +27,33 @@ import javax.validation.Valid;
  * This controller provides the REST methods
  */
 @RestController
-@RequestMapping("/api/prospects/")
+@RequestMapping("/api/prospects")
 public class ProspectsController {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
-	private final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+	private final DateTimeFormatter dtf = DateTimeFormatter
+			.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
 
 	// Let Spring DI inject the service for us
 	@Autowired
 	private ProspectsService prospectsService;
 	
-	@RequestMapping(value = "/", 
-			method = RequestMethod.POST, 
+	@RequestMapping(method = RequestMethod.POST,
 			consumes = {"application/x-www-form-urlencoded"})
 	@ResponseStatus(HttpStatus.CREATED)
 	public @ResponseBody Prospect addProspect(Prospect prospect){
+		prospect.setUUID(UUID.randomUUID().toString());
 		prospect.setCreatedOn(LocalDateTime.now().format(dtf));
 		prospect.setUpdatedOn(LocalDateTime.now().format(dtf));
 		return prospectsService.addProspect(prospect);
 	}
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(method = RequestMethod.GET)
 	public List<Prospect> getProspects() {
 		return prospectsService.getProspects();
 	}
 	
-	@RequestMapping(value = "{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public Prospect getProspect(@PathVariable("id") String id) {
 		return prospectsService.getProspect(id);
 	}
