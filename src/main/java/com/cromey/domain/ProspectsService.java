@@ -28,4 +28,10 @@ public class ProspectsService {
 		return repository.findOne(id);
 	}
 	
+	public Prospect deleteProspect(String id) {
+		Prospect deleted = repository.findOne(id);
+		repository.delete(deleted);
+		return new Prospect();
+	}
+	
 }

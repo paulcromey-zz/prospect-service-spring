@@ -2,6 +2,7 @@ package com.cromey.controller;
 
 import static org.mockito.Matchers.isA;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -97,6 +98,16 @@ public class ProspectsControllerTest {
 		when(prospectsService.getProspect("1")).thenReturn(prospect);
 		
 		mockMvc.perform(get("/api/prospects/{id}", 1)).andExpect(status().isOk());
+	}
+	
+	@Test
+	public void testDeleteProspect() throws Exception {
+		
+		Prospect prospect = new Prospect();
+		
+		when(prospectsService.getProspect("1")).thenReturn(prospect);
+		
+		mockMvc.perform(delete("/api/prospects/{id}", 1)).andExpect(status().isNoContent());
 	}
 	
 	static byte[] convertObjectToJsonBytes(Object object) throws IOException {

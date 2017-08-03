@@ -57,5 +57,11 @@ public class ProspectsController {
 	public Prospect getProspect(@PathVariable("id") String id) {
 		return prospectsService.getProspect(id);
 	}
+	
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public Prospect deleteProspect(@PathVariable("id") String id) {
+		return prospectsService.deleteProspect(id);
+	}
 
 }
