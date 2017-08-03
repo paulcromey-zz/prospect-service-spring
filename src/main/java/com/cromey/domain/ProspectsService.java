@@ -16,8 +16,16 @@ public class ProspectsService {
 	@Autowired
 	private ProspectsRepository repository;
 
+	public Prospect addProspect(Prospect prospect) {
+		return repository.save(prospect);
+	}
+	
 	public List<Prospect> getProspects() {
 		return repository.findAll();
 	}
 
+	public Prospect getProspect(String id) {
+		return repository.findOne(id);
+	}
+	
 }
