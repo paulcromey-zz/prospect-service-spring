@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -28,6 +30,7 @@ import javax.validation.Valid;
 public class ProspectsController {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+	private final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
 
 	// Let Spring DI inject the service for us
 	@Autowired
@@ -38,6 +41,8 @@ public class ProspectsController {
 			consumes = {"application/x-www-form-urlencoded"})
 	@ResponseStatus(HttpStatus.CREATED)
 	public @ResponseBody Prospect addProspect(Prospect prospect){
+		prospect.setCreatedOn(LocalDateTime.now().format(dtf));
+		prospect.setUpdatedOn(LocalDateTime.now().format(dtf));
 		return prospectsService.addProspect(prospect);
 	}
 

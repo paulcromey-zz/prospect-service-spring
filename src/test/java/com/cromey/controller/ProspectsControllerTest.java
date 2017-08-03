@@ -37,11 +37,6 @@ import com.cromey.model.Prospect;
 @WebAppConfiguration
 public class ProspectsControllerTest {
 	
-	private static final MediaType APPLICATION_JSON_UTF8 = new MediaType(MediaType.APPLICATION_JSON.getType(),
-			MediaType.APPLICATION_JSON.getSubtype(),
-			Charset.forName("utf8")
-	);
-	
 	private static final MediaType APPLICATION_FORM_URLENCODED = new MediaType(MediaType.APPLICATION_FORM_URLENCODED.getType(),
 			MediaType.APPLICATION_FORM_URLENCODED.getSubtype(),
 			Charset.forName("utf8")

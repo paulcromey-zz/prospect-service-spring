@@ -1,6 +1,7 @@
 package com.cromey.model;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -19,6 +20,8 @@ public class Prospect implements Serializable {
 	String source;
 	String token;
 	String ip_address;
+	String createdOn;
+	String updatedOn;
 
 	public String getId() {
 		return id;
@@ -66,6 +69,22 @@ public class Prospect implements Serializable {
 
 	public void setIp_address(String ip_address) {
 		this.ip_address = ip_address;
+	}
+
+	public String getCreatedOn() {
+		return createdOn;
+	}
+
+	public void setCreatedOn(String createdOn) {
+		this.createdOn = createdOn;
+	}
+	
+	public String getUpdatedOn() {
+		return updatedOn;
+	}
+
+	public void setUpdatedOn(String updatedOn) {
+		this.updatedOn = updatedOn;
 	}
 
 	/*@Override
