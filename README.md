@@ -25,3 +25,7 @@ https://robomongo.org/
 To import:
 
 `mongoimport --db mean --collection prospects --file prospects.json`
+
+## Postman Tests
+
+https://github.com/paulcromey/prospect-service-tests
