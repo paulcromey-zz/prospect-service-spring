@@ -57,8 +57,8 @@ public class ProspectsController {
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public @ResponseBody Prospect updateProspect(Prospect prospect) {
 		Prospect updated = prospectsService.getProspect(prospect.getId());
-		if (Objects.isNull(updated))
-			throw new ProspectNotFoundException();
+		//if (Objects.isNull(updated))
+		//	throw new ProspectNotFoundException();
 		updated.setEmail(prospect.getEmail());
 		updated.setSource(prospect.getSource());
 		updated.setIp_address(prospect.getIp_address());
