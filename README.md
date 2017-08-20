@@ -8,10 +8,6 @@ mvn clean install
 
 mvn spring-boot:run
 
-## To fix
-
-broken test
-
 ## MongoDB
 
 To install:
